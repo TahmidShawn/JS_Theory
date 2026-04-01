@@ -1,9 +1,9 @@
-````markdown
 # JavaScript `.call()` Method
 
 ## Overview
 
-The `.call()` method is a built-in property of JavaScript functions that allows you to **invoke a function with a specific `this` context**. In other words, you can **borrow a method from one object and execute it for another object**.
+The `.call()` method is a built-in property of JavaScript functions that allows you to **invoke a function with a specific `this` context**.
+In other words, you can **borrow a method from one object and execute it for another object**.
 
 ---
 
@@ -26,9 +26,8 @@ class Person {
 const parent = new Person("Alice", "Johnson");
 console.log(parent.getFullName()); // Output: "Alice Johnson"
 ```
-````
 
-Now, imagine we have another class, `Child`, and we want to use the `getFullName` method from `Person`:
+Now, imagine we have another class `Child`, and we want to use the `getFullName` method from `Person`:
 
 ```javascript
 class Child {
@@ -44,16 +43,16 @@ const child = new Child("Bob", "Smith");
 console.log(parent.getFullName.call(child)); // Output: "Bob Smith"
 ```
 
-**Explanation:**
+### Explanation
 
-- `.call(child)` sets `this` inside `getFullName()` to the `child` object.
-- The method is executed as if it belonged to the `child` object, even though it is defined in `Person`.
+* `.call(child)` sets `this` inside `getFullName()` to the `child` object.
+* The method executes as if it belonged to the `child`, even though it is defined in `Person`.
 
 ---
 
 ## Practical Example: E-commerce Scenario
 
-Consider a `Product` class with a method to calculate a discounted price:
+Consider a `Product` class with a method to apply a discount:
 
 ```javascript
 class Product {
@@ -71,7 +70,7 @@ class Product {
 const laptop = new Product("Laptop", 75000);
 ```
 
-Suppose we have another class `CartItem`:
+Now suppose we have another class `CartItem`:
 
 ```javascript
 class CartItem {
@@ -85,36 +84,38 @@ class CartItem {
 const cartItem = new CartItem("Smartphone", 20000, 2);
 ```
 
-We can **borrow the `applyDiscount` method from `Product`** for our `CartItem` object:
+We can borrow the `applyDiscount` method from `Product`:
 
 ```javascript
 const discountedPrice = laptop.applyDiscount.call(cartItem, 700);
 console.log(discountedPrice); // Output: 19300
 ```
 
-**Explanation:**
+### Explanation
 
-- `this` inside `applyDiscount()` is set to `cartItem`.
-- The discount argument (`700`) is passed normally to the function.
-- We successfully reuse the `Product` method for `CartItem` without rewriting it.
+* `this` inside `applyDiscount()` is set to `cartItem`.
+* The discount (`700`) is passed as a normal argument.
+* The method is reused without rewriting it.
 
 ---
 
 ## Key Points
 
-1. **Purpose:** `.call()` allows a function to be invoked with a specific `this` value.
-2. **First argument:** Must be the object to use as `this`.
-3. **Subsequent arguments:** Passed to the function as normal parameters.
-4. **Related methods:**
-    - `.apply(thisArg, [arg1, arg2, ...])` → accepts arguments as an array.
-    - `.bind(thisArg, arg1, arg2, ...)` → returns a new function with `this` permanently bound.
+* `.call()` allows a function to run with a specific `this`.
+* The **first argument** is always the object to use as `this`.
+* Additional arguments are passed normally.
 
-5. **Note:** `.call()` is **not object-oriented programming** by itself; it’s simply a tool for **method borrowing or dynamic `this` assignment**.
+### Related Methods
+
+* `.apply(thisArg, [arg1, arg2])` → takes arguments as an array
+* `.bind(thisArg, arg1, arg2)` → returns a new function
+
+> ⚠️ `.call()` is not OOP itself — it’s a tool for controlling `this`.
 
 ---
 
-### When to Use
+## When to Use
 
-- Borrowing a method from one object for another.
-- Dynamically setting `this` in functions.
-- Reusing functions without duplicating code.
+* Borrowing methods between objects
+* Dynamically setting `this`
+* Avoiding duplicate code
