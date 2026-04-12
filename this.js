@@ -2,7 +2,9 @@
 
 // global space
 
-console.log(this);
+console.log("kk", this); // bind inside gec
+
+// creation
 
 // 1. in global space this value is global obj
 // 2. for browser its window, for node js it global
@@ -14,15 +16,15 @@ console.log(this);
 function a() {
     console.log(this);
 }
-a(); // default binding
+a(); // default binding (bind inside fec)
 
 // 1. inside a regular function this depends on how the function is called
 // 2. if we called the function without any reference to obj ---> default binding applies
 // 3. (non-strict mode) ---> this is directly set to window
 // 4. (strict mode) ---> this is directly set to undefined
-// 5. strict/ not strick matter on default binding only
+// 5. strict/ not strict matter on default binding only
 
-window.a(); // implicit binding
+window.a(); // implicit binding (f=bind inside fec)
 // 1. this = window
 // 2. because function is called with an object reference (window.a)
 // 3. object before dot becomes this
@@ -39,7 +41,7 @@ const myObj = {
     },
 };
 
-myObj.x(); // implicit binding
+myObj.x(); // implicit binding (bind inside fec)
 
 // 1. this = myObj
 // 2. function is called as myObj.x()
@@ -73,3 +75,7 @@ student.greet.call(student2);
 // todo
 // 1. apply
 // 2. bind
+
+// ----------------------------------------------------------------------------------------------
+
+// arrow function
